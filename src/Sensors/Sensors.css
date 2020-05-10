@@ -1,0 +1,25 @@
+.table {
+  color: #333;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.table td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  width: 300px;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+tr.clickable:hover {
+  background-color: #dee2e6;
+}
+
+tbody.clickable {
+  cursor: pointer;
+}
