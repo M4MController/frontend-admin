@@ -1,0 +1,21 @@
+.Data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+    flex-direction: column;
+}
+
+.sensorId {
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+.elem {
+    margin-left: 10px;
+    height: 30px;
+}
+
+.elems:first-child {
+    margin-left: 0;
+}

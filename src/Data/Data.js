@@ -1,11 +1,13 @@
 import React from 'react';
 import './Data.css';
 
-function downloadAsFile(data) {
+const baseUrl = `${window.location.protocol}//${window.location.host}`;
+
+function downloadAsFile(data, name) {
     let a = document.createElement("a");
     let file = new Blob([data], {type: 'application/json'});
     a.href = URL.createObjectURL(file);
-    a.download = "example.txt";
+    a.download = name;
     a.click();
 }
 
@@ -26,13 +28,16 @@ export class Data extends React.Component {
         return (
             <div className="Data">
                 <div className="sensorId">{sensorId}</div>
-                <input value={date} onChange={this.onDateChange.bind(this)} placeholder={'5.9.2020'}/>
-                <input value={key} onChange={this.onKeyChange.bind(this)} placeholder={'lol'}/>
-                <button
-                    onClick={this.onClickButton.bind(this)}
-                >
-                    Скачать
-                </button>
+                <div className="elems">
+                    <input value={date} onChange={this.onDateChange.bind(this)} placeholder={'5.9.2020'} className="elem"/>
+                    <input value={key} onChange={this.onKeyChange.bind(this)} placeholder={'lol'} className="elem"/>
+                    <button
+                        className="elem"
+                        onClick={this.onClickButton.bind(this)}
+                    >
+                        Скачать
+                    </button>
+                </div>
             </div>
         );
     }
@@ -46,17 +51,24 @@ export class Data extends React.Component {
     }
 
     onClickButton() {
-        const { sensorId } = this.props;
+        const { sensorId, email } = this.props;
         const { date, key } = this.state;
         const [ day, month, year ] = date.split('.');
+        const name = `${email}-${sensorId}-${date}.tsv`;
 
-        // fetch(`https://9a3fe4dd.ngrok.io/api/admin/sensors/${sensorId}/${year}/${month}/${day}&key=&{key}`, {
-        fetch(`https://9a3fe4dd.ngrok.io/api/admin/sensors/13a1648fe824494d8cee524d9ba1fe44/2020/5/9?key=lol`, {
+        fetch(`${baseUrl}/api/admin/sensors/${sensorId}/${year}/${month}/${day}&key=${key}`, {
             method: 'GET',
             mode: 'cors'
         })
-            .then((res) => res.text())
-            .then((res) => downloadAsFile(res));
+            .then((res) => {
+                if (res.status >= 300 || res.status < 200) {
+                    alert(`Ошибка, код ответа от севера: ${res.status}`);
+                    throw res;
+                }
+
+                return res.text();
+            })
+            .then((res) => downloadAsFile(res, name));
 
     }
 }
