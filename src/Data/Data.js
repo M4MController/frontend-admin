@@ -56,7 +56,7 @@ export class Data extends React.Component {
         const [ day, month, year ] = date.split('.');
         const name = `${email}-${sensorId}-${date}.tsv`;
 
-        fetch(`${baseUrl}/api/admin/sensors/${sensorId}/${year}/${month}/${day}&key=${key}`, {
+        fetch(`${baseUrl}/api/admin/sensors/${sensorId}/${year}/${month}/${day}?key=${key}`, {
             method: 'GET',
             mode: 'cors'
         })
