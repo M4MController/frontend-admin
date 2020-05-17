@@ -1,0 +1,22 @@
+.header {
+    background-color: #567ba7;
+    color: #fff;
+    max-height: 75px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__logo-wrapper {
+    padding: 10px 10px 10px 50px;
+}
+
+.header__logo {
+    width: 55px;
+    height: 55px;
+}
+
+.header__exit-button {
+    margin: 25px 50px 25px 25px;
+    font-size: 18px;
+    cursor: pointer;
+}
