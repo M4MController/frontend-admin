@@ -1,9 +1,6 @@
 import React from 'react';
 import './Sensors.css';
-
-const baseUrl = `${window.location.protocol}//${window.location.host}`;
-
-let isFetch = false;
+import {baseUrl} from "../App";
 
 export class Sensors extends React.Component {
   constructor() {
@@ -16,11 +13,10 @@ export class Sensors extends React.Component {
 
   render() {
     const {sensors} = this.state;
+    const {campaignId} = this.props;
 
-    if (!sensors.length && !isFetch) {
-      isFetch = true;
-
-      fetch(`${baseUrl}/api/admin/sensors`, {
+    if (!sensors.length) {
+      fetch(`${baseUrl}/api/admin/sensors/${campaignId}`, {
         method: 'GET',
         mode: 'cors'
       })
@@ -39,7 +35,6 @@ export class Sensors extends React.Component {
 
     const body = sensors.map((sensor) => (
         <tr className="clickable" onClick={() => {onChangePage(sensor.sensor_id, sensor.email)}}>
-          <td>{sensor.sensor_id}</td>
           <td>{sensor.email}</td>
           <td>{sensor.name}</td>
         </tr>
@@ -50,7 +45,6 @@ export class Sensors extends React.Component {
           <table className="table">
             <thead>
             <tr>
-              <th>sensor_id</th>
               <th>email</th>
               <th>name</th>
             </tr>

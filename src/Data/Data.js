@@ -1,7 +1,6 @@
 import React from 'react';
 import './Data.css';
-
-const baseUrl = `${window.location.protocol}//${window.location.host}`;
+import {baseUrl} from "../App";
 
 function downloadAsFile(data, name) {
     let a = document.createElement("a");
