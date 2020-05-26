@@ -71,7 +71,7 @@ export class App extends React.Component {
           let isLogin = false;
 
           res.forEach((campaign) => {
-            if (campaign.name === campaignName && password === '123') {
+            if (campaign.name.toLowerCase() === campaignName.toLowerCase() && password === '123') {
               localStorage.setItem('campaignName', campaignName);
               localStorage.setItem('campaignId', campaign.id);
 
