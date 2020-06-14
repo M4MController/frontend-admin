@@ -34,7 +34,7 @@ export class Data extends React.Component {
                         <div>
                             Запрашиваемая дата
                         </div>
-                        <input value={date} onChange={this.onDateChange.bind(this)} className="input"/>
+                        <input value={date} type="date" onChange={this.onDateChange.bind(this)} className="input"/>
                     </div>
                     <div className="elem">
                         <div>
@@ -66,7 +66,7 @@ export class Data extends React.Component {
     onClickButton() {
         const { sensor } = this.props;
         const { date, key } = this.state;
-        const [ day, month, year ] = date.split('.');
+        const [ year, month, day ] = date.split('-');
         const name = `${sensor.email}-${sensor.sensor_id}-${date}.tsv`;
 
         fetch(`${baseUrl}/api/admin/sensors/${sensor.sensor_id}/${year}/${month}/${day}?key=${key}`, {
