@@ -7,11 +7,11 @@
 }
 
 .user {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-size: 17px;
 }
 
-.sensorId {
+.sensorName {
     font-size: 17px;
     margin-bottom: 5px;
 }

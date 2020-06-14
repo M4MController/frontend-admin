@@ -27,14 +27,13 @@ export class App extends React.Component {
       campaignName: campaignName,
       campaignId: campaignId,
       page: !campaignName ? pages.login : pages.users,
-      sensorId: null,
-      email: null,
+      sensor: null,
       user: null
     };
   }
 
   render() {
-    const { page, sensorId, email, campaignId, campaignName, user } = this.state;
+    const { page, sensor, campaignId, campaignName, user } = this.state;
 
     return (
         <div className="app">
@@ -43,7 +42,7 @@ export class App extends React.Component {
             {page === pages.login && <Login onLogin={this.onLogin.bind(this)}/>}
             {page === pages.users && <Users campaignId={campaignId} onChangePage={this.onChangePageToSensors.bind(this)} />}
             {page === pages.sensors && <Sensors userId={user.id} campaignId={campaignId} onChangePage={this.onChangePageToData.bind(this)} />}
-            {page === pages.data && <Data user={user} sensorId={sensorId} email={email} onBackPage={this.onChangePageToSensors.bind(this)} />}
+            {page === pages.data && <Data user={user} sensor={sensor} onBackPage={this.onChangePageToSensors.bind(this)} />}
           </div>
           <Footer />
         </div>
@@ -87,11 +86,11 @@ export class App extends React.Component {
         });
   }
 
-  onChangePageToData(id, email) {
-    this.setState({page: pages.data, sensorId: id, email: email});
+  onChangePageToData(sensor) {
+    this.setState({page: pages.data, sensor});
   }
 
   onChangePageToSensors(user) {
-    this.setState({user, page: pages.sensors, sensorId: null});
+    this.setState({user, page: pages.sensors, sensor: null});
   }
 }

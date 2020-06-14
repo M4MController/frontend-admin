@@ -34,7 +34,7 @@ export class Sensors extends React.Component {
     const { onChangePage } = this.props;
 
     const body = sensors.map((sensor) => (
-        <tr className="clickable" onClick={() => {onChangePage(sensor.sensor_id, sensor.email)}}>
+        <tr className="clickable" onClick={() => {onChangePage(sensor)}}>
           <td>{sensor.email}</td>
           <td>{sensor.name}</td>
         </tr>

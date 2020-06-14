@@ -21,14 +21,14 @@ export class Data extends React.Component {
     }
 
     render() {
-        const { sensorId, user } = this.props;
+        const { sensor, user } = this.props;
         const { date, key } = this.state;
         const userName = `${user.last_name} ${user.first_name}`;
 
         return (
             <div className="Data">
                 <div className="user">{userName}</div>
-                <div className="sensorId">{sensorId}</div>
+                <div className="sensorName">{sensor.name}</div>
                 <div className="elems">
                     <div className="elem">
                         <div>
@@ -64,12 +64,12 @@ export class Data extends React.Component {
     }
 
     onClickButton() {
-        const { sensorId, email } = this.props;
+        const { sensor } = this.props;
         const { date, key } = this.state;
         const [ day, month, year ] = date.split('.');
-        const name = `${email}-${sensorId}-${date}.tsv`;
+        const name = `${sensor.email}-${sensor.sensor_id}-${date}.tsv`;
 
-        fetch(`${baseUrl}/api/admin/sensors/${sensorId}/${year}/${month}/${day}?key=${key}`, {
+        fetch(`${baseUrl}/api/admin/sensors/${sensor.sensor_id}/${year}/${month}/${day}?key=${key}`, {
             method: 'GET',
             mode: 'cors'
         })
