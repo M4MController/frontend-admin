@@ -15,7 +15,11 @@
     height: 55px;
 }
 
-.header__exit-button {
+.header__buttons {
+    display: flex;
+}
+
+.header__button {
     margin: 25px 50px 25px 25px;
     font-size: 18px;
     cursor: pointer;

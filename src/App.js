@@ -6,12 +6,14 @@ import {Header} from "./Header/Header";
 import {Footer} from "./Footer/Footer";
 import {Login} from "./Login/Login";
 import {Users} from "./Users/Users";
+import {Key} from "./Key/Key";
 
 export const pages =  {
   login: 'login',
   sensors: 'sensors',
   data: 'data',
-  users: 'users'
+  users: 'users',
+  key: 'key'
 };
 
 export const baseUrl = `https://meter4.me`;
@@ -38,7 +40,8 @@ export class App extends React.Component {
     return (
         <div className="app">
           <div className="app__content">
-            <Header onLogout={this.onLogout.bind(this)} campaignName={campaignName}/>
+            <Header onLogout={this.onLogout.bind(this)} onChangePageToKey={this.onChangePageToKey.bind(this)} campaignName={campaignName}/>
+            {page === pages.key && <Key />}
             {page === pages.login && <Login onLogin={this.onLogin.bind(this)}/>}
             {page === pages.users && <Users campaignId={campaignId} onChangePage={this.onChangePageToSensors.bind(this)} />}
             {page === pages.sensors && <Sensors userId={user.id} campaignId={campaignId} onChangePage={this.onChangePageToData.bind(this)} />}
@@ -92,5 +95,9 @@ export class App extends React.Component {
 
   onChangePageToSensors(user) {
     this.setState({user, page: pages.sensors, sensor: null});
+  }
+
+  onChangePageToKey() {
+    this.setState({page: pages.key});
   }
 }

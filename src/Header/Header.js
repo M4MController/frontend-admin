@@ -3,7 +3,7 @@ import './Header.css';
 
 export class Header extends React.Component {
     render() {
-        const { campaignName } = this.props;
+        const { campaignName, onChangePageToKey, onLogout } = this.props;
 
         return (
             <div className="header">
@@ -11,11 +11,17 @@ export class Header extends React.Component {
                     <img src="https://meter4.me/images/logo.svg" className="header__logo"/>
                 </a>
 
-                {campaignName && (
-                    <div className="header__exit-button" onClick={this.props.onLogout}>
-                        {`Выйти (${campaignName})`}
+                <div className="header__buttons">
+                    <div className="header__button" onClick={onChangePageToKey}>
+                        Проверить ключ
                     </div>
-                )}
+
+                    {campaignName && (
+                        <div className="header__button" onClick={onLogout}>
+                            {`Выйти (${campaignName})`}
+                        </div>
+                    )}
+                </div>
             </div>
         );
     }

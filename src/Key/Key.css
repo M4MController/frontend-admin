@@ -1,0 +1,26 @@
+.key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+    flex-direction: column;
+}
+
+.key__button,
+.key__input {
+    height: 30px;
+}
+
+.key__input {
+    width: 200px;
+}
+
+.key__elem {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.key__title {
+    font-size: 15px;
+    margin-bottom: 3px;
+}
