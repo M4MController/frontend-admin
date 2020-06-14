@@ -3,16 +3,19 @@ import './Header.css';
 
 export class Header extends React.Component {
     render() {
+        const { campaignName } = this.props;
 
         return (
             <div className="header">
-                <div className="header__logo-wrapper">
+                <a target={'_self'} href={`https://meter4.me/about`} className="header__logo-wrapper">
                     <img src="https://meter4.me/images/logo.svg" className="header__logo"/>
-                </div>
+                </a>
 
-                <div className="header__exit-button" onClick={this.props.onLogout}>
-                    Выйти
-                </div>
+                {campaignName && (
+                    <div className="header__exit-button" onClick={this.props.onLogout}>
+                        {`Выйти (${campaignName})`}
+                    </div>
+                )}
             </div>
         );
     }

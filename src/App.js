@@ -12,7 +12,7 @@ export const pages =  {
   data: 'data'
 };
 
-export const baseUrl = `${window.location.protocol}//${window.location.host}`;
+export const baseUrl = `https://meter4.me`;
 
 export class App extends React.Component {
   constructor() {
@@ -31,14 +31,12 @@ export class App extends React.Component {
   }
 
   render() {
-    const { page, sensorId, email, campaignId } = this.state;
-
-    console.log(campaignId);
+    const { page, sensorId, email, campaignId, campaignName } = this.state;
 
     return (
         <div className="app">
           <div className="app__content">
-            <Header onLogout={this.onLogout.bind(this)}/>
+            <Header onLogout={this.onLogout.bind(this)} campaignName={campaignName}/>
             {page === pages.login && <Login onLogin={this.onLogin.bind(this)}/>}
             {page === pages.sensors && <Sensors campaignId={campaignId} onChangePage={this.onChangePageToData.bind(this)} />}
             {page === pages.data && <Data sensorId={sensorId} email={email} onChangePage={this.onChangePageToSensors.bind(this)} />}
@@ -49,8 +47,8 @@ export class App extends React.Component {
   }
 
   onLogout() {
-    localStorage.setItem('login', null);
-    localStorage.setItem('login', null);
+    localStorage.setItem('campaignName', null);
+    localStorage.setItem('campaignId', null);
     this.setState({campaignName: null, campaignId: null, page: pages.login})
   }
 
