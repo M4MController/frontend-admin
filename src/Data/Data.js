@@ -21,21 +21,35 @@ export class Data extends React.Component {
     }
 
     render() {
-        const { sensorId } = this.props;
+        const { sensorId, user } = this.props;
         const { date, key } = this.state;
+        const userName = `${user.last_name} ${user.first_name}`;
 
         return (
             <div className="Data">
+                <div className="user">{userName}</div>
                 <div className="sensorId">{sensorId}</div>
                 <div className="elems">
-                    <input value={date} onChange={this.onDateChange.bind(this)} placeholder={'5.9.2020'} className="elem"/>
-                    <input value={key} onChange={this.onKeyChange.bind(this)} placeholder={'lol'} className="elem"/>
-                    <button
-                        className="elem"
-                        onClick={this.onClickButton.bind(this)}
-                    >
-                        Скачать
-                    </button>
+                    <div className="elem">
+                        <div>
+                            Запрашиваемая дата
+                        </div>
+                        <input value={date} onChange={this.onDateChange.bind(this)} className="input"/>
+                    </div>
+                    <div className="elem">
+                        <div>
+                            Ключ шифрования
+                        </div>
+                        <input value={key} onChange={this.onKeyChange.bind(this)} className="input"/>
+                    </div>
+                    <div className="elem">
+                        <button
+                            className="button"
+                            onClick={this.onClickButton.bind(this)}
+                        >
+                            Скачать
+                        </button>
+                    </div>
                 </div>
             </div>
         );

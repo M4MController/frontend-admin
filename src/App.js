@@ -5,11 +5,13 @@ import { Sensors } from "./Sensors/Sensors";
 import {Header} from "./Header/Header";
 import {Footer} from "./Footer/Footer";
 import {Login} from "./Login/Login";
+import {Users} from "./Users/Users";
 
 export const pages =  {
   login: 'login',
   sensors: 'sensors',
-  data: 'data'
+  data: 'data',
+  users: 'users'
 };
 
 export const baseUrl = `https://meter4.me`;
@@ -24,22 +26,24 @@ export class App extends React.Component {
     this.state = {
       campaignName: campaignName,
       campaignId: campaignId,
-      page: !campaignName ? pages.login : pages.sensors,
+      page: !campaignName ? pages.login : pages.users,
       sensorId: null,
-      email: null
+      email: null,
+      user: null
     };
   }
 
   render() {
-    const { page, sensorId, email, campaignId, campaignName } = this.state;
+    const { page, sensorId, email, campaignId, campaignName, user } = this.state;
 
     return (
         <div className="app">
           <div className="app__content">
             <Header onLogout={this.onLogout.bind(this)} campaignName={campaignName}/>
             {page === pages.login && <Login onLogin={this.onLogin.bind(this)}/>}
-            {page === pages.sensors && <Sensors campaignId={campaignId} onChangePage={this.onChangePageToData.bind(this)} />}
-            {page === pages.data && <Data sensorId={sensorId} email={email} onChangePage={this.onChangePageToSensors.bind(this)} />}
+            {page === pages.users && <Users campaignId={campaignId} onChangePage={this.onChangePageToSensors.bind(this)} />}
+            {page === pages.sensors && <Sensors userId={user.id} campaignId={campaignId} onChangePage={this.onChangePageToData.bind(this)} />}
+            {page === pages.data && <Data user={user} sensorId={sensorId} email={email} onBackPage={this.onChangePageToSensors.bind(this)} />}
           </div>
           <Footer />
         </div>
@@ -47,8 +51,8 @@ export class App extends React.Component {
   }
 
   onLogout() {
-    localStorage.setItem('campaignName', null);
-    localStorage.setItem('campaignId', null);
+    localStorage.setItem('campaignName', '');
+    localStorage.setItem('campaignId', '');
     this.setState({campaignName: null, campaignId: null, page: pages.login})
   }
 
@@ -73,7 +77,7 @@ export class App extends React.Component {
               localStorage.setItem('campaignName', campaignName);
               localStorage.setItem('campaignId', campaign.id);
 
-              this.setState({campaignName: campaignName, campaignId: campaign.id, page: pages.sensors})
+              this.setState({campaignName: campaignName, campaignId: campaign.id, page: pages.users})
 
               isLogin = true;
             }
@@ -87,7 +91,7 @@ export class App extends React.Component {
     this.setState({page: pages.data, sensorId: id, email: email});
   }
 
-  onChangePageToSensors() {
-    this.setState({page: pages.sensors, sensorId: null});
+  onChangePageToSensors(user) {
+    this.setState({user, page: pages.sensors, sensorId: null});
   }
 }

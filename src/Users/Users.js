@@ -1,22 +1,22 @@
 import React from 'react';
-import './Sensors.css';
+import './Users.css';
 import {baseUrl} from "../App";
 
-export class Sensors extends React.Component {
+export class Users extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      sensors: []
+      users: []
     };
   }
 
   render() {
-    const {sensors} = this.state;
-    const {campaignId, userId} = this.props;
+    const {users} = this.state;
+    const {campaignId} = this.props;
 
-    if (!sensors.length) {
-      fetch(`${baseUrl}/api/admin/${campaignId}/sensors/${userId}`, {
+    if (!users.length) {
+      fetch(`${baseUrl}/api/admin/${campaignId}/users`, {
         method: 'GET',
         mode: 'cors'
       })
@@ -28,29 +28,29 @@ export class Sensors extends React.Component {
 
             return res.json();
           })
-          .then((res) => this.setState({sensors: res}));
+          .then((res) => this.setState({users: res}));
     }
 
     const { onChangePage } = this.props;
 
-    const body = sensors.map((sensor) => (
-        <tr className="clickable" onClick={() => {onChangePage(sensor.sensor_id, sensor.email)}}>
-          <td>{sensor.email}</td>
-          <td>{sensor.name}</td>
+    const body = users.map((user) => (
+        <tr className="clickable" onClick={() => {onChangePage(user)}}>
+          <td>{user.last_name}</td>
+          <td>{user.first_name}</td>
         </tr>
     ));
 
     return (
-        <div className="Sensors">
+        <div className="Users">
           <table className="table">
             <thead>
             <tr>
-              <th>email</th>
-              <th>name</th>
+              <th>Имя</th>
+              <th>Фамилия</th>
             </tr>
             </thead>
             <tbody className="clickable">
-            {body}
+                {body}
             </tbody>
           </table>
         </div>
