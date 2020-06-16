@@ -16,7 +16,7 @@ export class Sensors extends React.Component {
     const {campaignId, userId} = this.props;
 
     if (!sensors.length) {
-      fetch(`${baseUrl}/api/admin/${campaignId}/sensors/${userId}`, {
+      fetch(`${baseUrl}/api/${campaignId}/sensors/${userId}`, {
         method: 'GET',
         mode: 'cors'
       })

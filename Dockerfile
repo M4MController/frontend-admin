@@ -12,12 +12,14 @@ RUN npm install
 ADD src ./src
 ADD public ./public
 
+ENV url=/
 RUN npm run build
 
 # copy generated files
 RUN mkdir -p /usr/html/ && cp -R build/. /usr/html/
 
-# remove unnecessary source files
+# remove unnecessary files
 RUN rm -fr /application
+RUN apk del nodejs npm git
 
 ADD nginx.conf /etc/nginx/nginx.conf

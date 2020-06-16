@@ -16,7 +16,7 @@ export const pages =  {
   key: 'key'
 };
 
-export const baseUrl = `https://meter4.me`;
+export const baseUrl = process.env['url'] || `https://m4mcloud.ru`;
 
 export class App extends React.Component {
   constructor() {
@@ -59,7 +59,7 @@ export class App extends React.Component {
   }
 
   onLogin(campaignName, password) {
-    fetch(`${baseUrl}/api/admin/companies`, {
+    fetch(`${baseUrl}/api/companies`, {
       method: 'GET',
       mode: 'cors'
     })

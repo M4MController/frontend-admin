@@ -16,7 +16,7 @@ export class Users extends React.Component {
     const {campaignId} = this.props;
 
     if (!users.length) {
-      fetch(`${baseUrl}/api/admin/${campaignId}/users`, {
+      fetch(`${baseUrl}/api/${campaignId}/users`, {
         method: 'GET',
         mode: 'cors'
       })
