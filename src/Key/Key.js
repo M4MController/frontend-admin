@@ -18,7 +18,7 @@ export class Key extends React.Component {
             <div className="key">
                 <div className="key__elem">
                     <div className="key__title">
-                        Ключ шифрования
+                        Публичный ключ
                     </div>
                     <input value={key} onChange={this.onKeyChange.bind(this)} className="key__input"/>
                 </div>
